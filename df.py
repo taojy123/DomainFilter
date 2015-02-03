@@ -1,16 +1,20 @@
-# -*- coding: cp936 -*-
 
 import urllib2
 import time
+import datetime
 
 try:
-    t = float(raw_input("请设置扫描间隔(秒):"))
+    t = float(open("2.txt").read())
 except:
     t = 0
+print t
 
-raw_input("请将输入的网址列表存放于 1.txt 文档中, 然后按下回车键开始..")
+output = datetime.datetime.now().strftime("%Y%m%d") + ".txt"
+print output
 
-open("output.txt", "w").write("")
+print "------------------------"
+
+open(output, "w").write("")
 lines = open("1.txt").readlines()
 for line in lines:
     line = line.strip()
@@ -34,8 +38,6 @@ for line in lines:
         print "ok"
     else:
         print "null"
-        open("output.txt", "a").write(line + "\n")
+        open(output, "a").write(line + "\n")
 
     time.sleep(t)
-
-raw_input("完成! 请按下回车键退出...")

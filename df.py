@@ -3,11 +3,16 @@ import urllib2
 import time
 import datetime
 
+t = 0
+timeout = 15
 try:
-    t = float(open("2.txt").read())
+    lines = open("2.txt").readlines()
+    t = float(lines[0])
+    timeout = float(lines[1])
 except:
-    t = 0
+    pass
 print t
+print timeout
 
 output = datetime.datetime.now().strftime("%Y%m%d") + ".txt"
 print output
@@ -28,7 +33,7 @@ for line in lines:
 
     flag = True
     try:
-        p = urllib2.urlopen(url, timeout=5).read()
+        p = urllib2.urlopen(url, timeout=timeout).read()
         if len(p) < 10:
             flag = False
     except:
@@ -41,3 +46,7 @@ for line in lines:
         open(output, "a").write(line + "\n")
 
     time.sleep(t)
+
+print "------------------------"
+print "Finish!"
+time.sleep(3)
